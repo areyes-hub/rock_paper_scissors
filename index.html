@@ -5,11 +5,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock_Paper_Scissors</title>
+    <link rel="stylesheet" href="styles.css">
+    </link>
+    <script src="scripts.js" defer></script>
 </head>
 
 <body>
-
-    <script src="scripts.js"></script>
+    <div id="display">
+        <div class="names">
+            <div class="your-display">
+                <h2 class="you"></h2>
+                <h1 class="human-choice"></h1>
+            </div>
+            <div class="cpu-display">
+                <h2 class="cpu"></h2>
+                <h1 class="cpu-choice"></h1>
+            </div>
+        </div>
+        <div class="winner">
+            <div>
+                <h1 class="outcome"></h1>
+                <h2 class="human-score"></h2>
+                <h2 class="cpu-score"></h2>
+            </div>
+        </div>
+    </div>
+    <div id="selections">
+        <button class="rock">Rock</button>
+        <button class="paper">Paper</button>
+        <button class="scissors">Scissors</button>
+    </div>
+    <div>
+        <h1 class="final"></h1>
+    </div>
 </body>
 
 </html>
