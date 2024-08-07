@@ -1,74 +1,119 @@
-let gameChoices = ["rock", "paper", "scissors"];
-let humanScore = 0;
-let cpuScore = 0;
+let you = document.querySelector(".you");
+you.textContent = "YOU: ";
+let cpu = document.querySelector(".cpu");
+cpu.textContent = "CPU: ";
 
-function keepScore(p1, p2) {
-    console.log(`Your score: ${p1}\nCPU score: ${p2}`);
-}
+let yourPick = document.querySelector(".human-choice");
+let cpuPick = document.querySelector(".cpu-choice");
+
+let final = document.querySelector(".final");
 
 function getComputerChoice() {
+    let gameChoices = ["Rock", "Paper", "Scissors"];
     let getCPUChoice = gameChoices[Math.floor(Math.random() * 3)];
-    return getCPUChoice;
-}
-
-function getHumanChoice() {
-    let getChoice = prompt("To play, please enter ('rock', 'paper' or 'scissors'): ").toLowerCase(); // Checks for case sensitivity.
-    return getChoice;
-}
-
-function playRound(humanChoice, computerChoice) {
-
-    console.log(`You chose: ${humanChoice}\nCPU chose: ${computerChoice}`);
-
-    if (humanChoice === "rock" && computerChoice === "paper") {
-        console.log(`${computerChoice} wins!`);
-        cpuScore += 1;
-    }
-    else if (humanChoice === "rock" && computerChoice === "scissors") {
-        console.log(`${humanChoice} wins!`);
-        humanScore += 1;
-    }
-    else if (humanChoice === "paper" && computerChoice === "scissors") {
-        console.log(`${computerChoice} wins!`);
-        cpuScore += 1;
-    }
-    else if (humanChoice === "paper" && computerChoice === "rock") {
-        console.log(`${humanChoice} wins!`);
-        humanScore += 1;
-    }
-    else if (humanChoice === "scissors" && computerChoice === "rock") {
-        console.log(`${computerChoice} wins!`);
-        cpuScore += 1;
-    }
-    else if (humanChoice === "scissors" && computerChoice === "paper") {
-        console.log(`${humanChoice} wins!`);
-        humanScore += 1;
-    }
-    else {
-        console.log(`No winner!`);
-    }
+    cpuPick.textContent = getCPUChoice;
 }
 
 function playGame() {
-    let humanSelection = getHumanChoice();
-    let compSelection = getComputerChoice();
+    let gameChoices = ["Rock", "Paper", "Scissors"];
+    let winner = document.querySelector(".outcome");
+    let hScore = document.querySelector(".human-score");
+    let cScore = document.querySelector(".cpu-score")
+    let userPoints = 0;
+    let cpuPoints = 0;
 
-    playRound(humanSelection, compSelection);
-    keepScore(humanScore, cpuScore);
-
-    let user = prompt("Do you want to play again? ").toLowerCase();
-    if (user === "yes") {
-        playGame();
-    }
-    else if (user === "no") {
-        return 0;
-    }
-    else {
-        console.log("Input not recognized...");
-        return 0;
-    }
+    let rockBtn = document.querySelector(".rock");
+    rockBtn.addEventListener("click", () => {
+        getWinner(userPoints, cpuPoints);
+        getComputerChoice();
+        yourPick.textContent = gameChoices[0];
+        if (cpuPick.textContent === "Paper") {
+            cpuPoints += 1;
+            winner.textContent = `Paper wins!`;
+            hScore.textContent = `Your score: ${userPoints}`
+            cScore.textContent = `CPU score: ${cpuPoints}`
+        }
+        else if (cpuPick.textContent === "Scissors") {
+            userPoints += 1;
+            winner.textContent = `Rock wins!`;
+            hScore.textContent = `Your score: ${userPoints}`
+            cScore.textContent = `CPU score: ${cpuPoints}`
+        }
+        else {
+            winner.textContent = `Tied Game!`;
+            hScore.textContent = `Your score: ${userPoints}`
+            cScore.textContent = `CPU score: ${cpuPoints}`
+        }
+    })
+    let paperBtn = document.querySelector(".paper");
+    paperBtn.addEventListener("click", () => {
+        getWinner(userPoints, cpuPoints);
+        getComputerChoice();
+        yourPick.textContent = gameChoices[1];
+        if (cpuPick.textContent === "Scissors") {
+            cpuPoints += 1;
+            winner.textContent = "Scissors wins!";
+            hScore.textContent = `Your score: ${userPoints}`
+            cScore.textContent = `CPU score: ${cpuPoints}`
+        }
+        else if (cpuPick.textContent === "Rock") {
+            userPoints += 1;
+            winner.textContent = "Paper wins!";
+            hScore.textContent = `Your score: ${userPoints}`
+            cScore.textContent = `CPU score: ${cpuPoints}`
+        }
+        else {
+            winner.textContent = "Tied game!";
+            hScore.textContent = `Your score: ${userPoints}`
+            cScore.textContent = `CPU score: ${cpuPoints}`
+        }
+    })
+    let scissorsBtn = document.querySelector(".scissors");
+    scissorsBtn.addEventListener("click", () => {
+        getWinner(userPoints, cpuPoints);
+        getComputerChoice();
+        yourPick.textContent = gameChoices[2];
+        if (cpuPick.textContent === "Paper") {
+            userPoints += 1;
+            winner.textContent = "Scissors wins!";
+            hScore.textContent = `Your score: ${userPoints}`
+            cScore.textContent = `CPU score: ${cpuPoints}`
+        }
+        else if (cpuPick.textContent === "Rock") {
+            cpuPoints += 1;
+            winner.textContent = "Rock wins!";
+            hScore.textContent = `Your score: ${userPoints}`
+            cScore.textContent = `CPU score: ${cpuPoints}`
+        }
+        else {
+            winner.textContent = "Tied game!";
+            hScore.textContent = `Your score: ${userPoints}`
+            cScore.textContent = `CPU score: ${cpuPoints}`
+        }
+    })
 }
 
+function getWinner(uP, cP) {
+    if (uP === 5) {
+        final.textContent = "You Won the game!";
+        yourPick.textContent = "";
+        cpuPick.textContent = "";
+        winner.textContent = "";
+        hScore.textContent = "";
+        cScore.textContent = "";
+    }
+    else if (cP === 5) {
+        final.textContent = "CPU Won the game!";
+        yourPick.textContent = "";
+        cpuPick.textContent = "";
+        winner.textContent = "";
+        hScore.textContent = "";
+        cScore.textContent = "";
+    }
+};
+
 playGame();
+
+
 
 
